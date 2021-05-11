@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="headerWrapper">
+    <div>
+      <h1>Film title: {{filmTitle}}</h1>
+    </div>
+    <div class="editButtonWrapper">
+      <button (click)="changeEditMode()" class="editButton">Edit</button>
+    </div>
+  </div>
+
+  <div *ngIf="edit === true" class="edit">
+    <h3>Edit information</h3>
+    <form>
+      <div>
+        <label for="changingTitle">Change title:</label>
+        <input [(ngModel)]="filmTitle" name="gameTitle" type="text" id="changingTitle" class="editInput"/>
+      </div>
+      <div>
+        <label for="changingGenre">Change genre:</label>
+        <input [(ngModel)]="info.genre" name="genre" type="text" id="changingGenre" class="editInput"/>
+      </div>
+      <div>
+        <label for="changingEngine">Change director:</label>
+        <input [(ngModel)]="info.director" name="engine" type="text" id="changingEngine" class="editInput"/>
+      </div>
+    </form>
+  </div>
+</div>
+
+<p class="underTitle">Genre: {{info.genre}}</p>
+<p class="underTitle">Director: {{info.director}}</p>
+<div class="listsWrapper">
+  <div>
+    <p class="listTitle">Stars:</p>
+    <ul>
+      <li *ngFor="let mode of stars;">
+        {{mode}}
+        <button (click)="deleteMode(mode)">Delete</button>
+      </li>
+    </ul>
+
+    <div class="listAddWrapper">
+      <form (submit)="addMode(mode.value)">
+        <input type="text" placeholder="Actor's name" #mode class="listAddInput"/>
+      </form>
+      <button (click)="addMode(mode.value)">Add star</button>
+    </div>
+
+  </div>
+  <div>
+    <p class="listTitle">Watchlist:</p>
+    <ul>
+      <li *ngFor="let platform of platforms">
+        {{platform}}
+        <button (click)="deletePlatform(platform)">Delete</button>
+      </li>
+    </ul>
+
+    <div class="listAddWrapper">
+      <form (submit)="addPlatform(platform.value)">
+        <input type="text" placeholder="Film's title" #platform class="listAddInput"/>
+      </form>
+
+      <button (click)="addPlatform(platform.value)">Add to watchlist</button>
+    </div>
+  </div>
+</div>
+
+
